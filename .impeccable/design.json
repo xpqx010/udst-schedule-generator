@@ -1,0 +1,198 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-07-21T00:00:00.000Z",
+  "title": "Design System: UDST Schedule Generator",
+  "extensions": {
+    "colorMeta": {
+      "institutional-blue": {
+        "role": "primary",
+        "displayName": "Institutional Blue",
+        "canonical": "#2457D6",
+        "tonalRamp": ["#07163E", "#0D286D", "#153B9A", "#1D4CC0", "#2457D6", "#6F8DE4", "#B8C7F2", "#E9EFFF"]
+      },
+      "institutional-blue-dark": {
+        "role": "primary",
+        "displayName": "Deep Institutional Blue",
+        "canonical": "#1947B8",
+        "tonalRamp": ["#061233", "#0B245E", "#103583", "#1947B8", "#466AC8", "#8097DA", "#BCC8EC", "#EBEFF9"]
+      },
+      "institutional-blue-soft": {
+        "role": "primary",
+        "displayName": "Pale Selection Blue",
+        "canonical": "#E9EFFF",
+        "tonalRamp": ["#111D3B", "#263761", "#4B5E88", "#7889B0", "#A7B5D6", "#C9D3EA", "#E0E7F8", "#F4F6FF"]
+      },
+      "academic-ink": {
+        "role": "neutral",
+        "displayName": "Academic Ink",
+        "canonical": "#132B3D",
+        "tonalRamp": ["#071017", "#132B3D", "#294456", "#486273", "#6D8493", "#9DADB7", "#CDD6DB", "#F2F5F6"]
+      },
+      "utility-slate": {
+        "role": "neutral",
+        "displayName": "Utility Slate",
+        "canonical": "#5D6D79",
+        "tonalRamp": ["#11181D", "#273139", "#414D56", "#5D6D79", "#7E8B95", "#A4AEB5", "#CED5D9", "#F3F5F6"]
+      },
+      "structural-line": {
+        "role": "neutral",
+        "displayName": "Structural Line",
+        "canonical": "#C8D1D7",
+        "tonalRamp": ["#172027", "#334049", "#56656F", "#7A8993", "#9EABB3", "#BBC5CB", "#DCE2E5", "#F4F6F7"]
+      },
+      "neutral-canvas": {
+        "role": "neutral",
+        "displayName": "Neutral Canvas",
+        "canonical": "#F6F5F0",
+        "tonalRamp": ["#25241F", "#4B4941", "#706E64", "#95938A", "#BAB8B0", "#D8D6CF", "#EAE9E3", "#F6F5F0"]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Surface",
+        "canonical": "#FFFFFF",
+        "tonalRamp": ["#262626", "#4D4D4D", "#737373", "#999999", "#BFBFBF", "#D9D9D9", "#EEEEEE", "#FFFFFF"]
+      },
+      "verified-green": {
+        "role": "secondary",
+        "displayName": "Verified Green",
+        "canonical": "#147D64",
+        "tonalRamp": ["#06241D", "#0A4436", "#10654F", "#147D64", "#399A82", "#72B9A7", "#B0D8CE", "#E1F3ED"]
+      },
+      "verified-green-soft": {
+        "role": "secondary",
+        "displayName": "Verified Green Soft",
+        "canonical": "#E1F3ED",
+        "tonalRamp": ["#10251F", "#27473E", "#4B6D63", "#77968D", "#A3BDB5", "#C3D8D2", "#E1F3ED", "#F4FBF8"]
+      },
+      "timetable-gold": {
+        "role": "secondary",
+        "displayName": "Timetable Gold",
+        "canonical": "#9A650A",
+        "tonalRamp": ["#2B1B02", "#503302", "#764D06", "#9A650A", "#BC852C", "#D6A85F", "#EBCF9E", "#FFF2D3"]
+      },
+      "timetable-gold-soft": {
+        "role": "secondary",
+        "displayName": "Timetable Gold Soft",
+        "canonical": "#FFF2D3",
+        "tonalRamp": ["#2D2512", "#584A29", "#827044", "#AC9766", "#D1BC8D", "#E7D5AF", "#F5E6C6", "#FFF7E4"]
+      },
+      "control-line": {
+        "role": "neutral",
+        "displayName": "Control Line",
+        "canonical": "#7B8E9A",
+        "tonalRamp": ["#172127", "#304049", "#4F626D", "#7B8E9A", "#98A7B0", "#B5C0C6", "#D5DCDF", "#F3F5F6"]
+      },
+      "danger": {
+        "role": "secondary",
+        "displayName": "Danger",
+        "canonical": "#A33131",
+        "tonalRamp": ["#310909", "#571313", "#7C2222", "#A33131", "#C45D5D", "#DA9292", "#ECC4C4", "#FBE9E7"]
+      },
+      "danger-soft": {
+        "role": "secondary",
+        "displayName": "Danger Soft",
+        "canonical": "#FBE9E7",
+        "tonalRamp": ["#321817", "#60322F", "#8C514D", "#B87873", "#D7A39F", "#E9C5C2", "#F5DCDA", "#FFF4F3"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "The single workflow introduction." },
+      "title": { "displayName": "Title", "purpose": "Workflow stages and major result regions." },
+      "body": { "displayName": "Body", "purpose": "Instructions and explanatory content." },
+      "label": { "displayName": "Label", "purpose": "Persistent field labels and action text." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "reduced-scroll", "value": "scroll-behavior: auto", "purpose": "Removes smooth scrolling when reduced motion is requested." }
+    ],
+    "breakpoints": [
+      { "name": "compact", "value": "440px" },
+      { "name": "stacked", "value": "720px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Advances the student to the next workflow stage.",
+      "html": "<button class=\"ds-btn-primary\">Continue to screenshots</button>",
+      "css": ".ds-btn-primary { min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 0 20px; color: #fff; background: var(--blue, #2457d6); border: 0; border-radius: 5px; font: 760 16px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; cursor: pointer; transition: background-color 180ms ease-out; } .ds-btn-primary:hover { background: var(--blue-dark, #1947b8); } .ds-btn-primary:focus-visible { outline: 3px solid #8ba7f5; outline-offset: 3px; } .ds-btn-primary:active { background: #153c9c; }"
+    },
+    {
+      "name": "Text Button",
+      "kind": "button",
+      "refersTo": "button-text",
+      "description": "Adds another item without competing with the stage action.",
+      "html": "<button class=\"ds-btn-text\">+ Add another course</button>",
+      "css": ".ds-btn-text { min-height: 44px; padding: 0; color: var(--blue, #2457d6); background: transparent; border: 0; border-radius: 5px; font: 750 16px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; cursor: pointer; } .ds-btn-text:hover { color: var(--blue-dark, #1947b8); } .ds-btn-text:focus-visible { outline: 3px solid #8ba7f5; outline-offset: 3px; } .ds-btn-text:active { color: #153c9c; }"
+    },
+    {
+      "name": "Course Input",
+      "kind": "input",
+      "refersTo": "input",
+      "description": "A persistent-label field for course identity.",
+      "html": "<label class=\"ds-field\" for=\"ds-course\">Course 1<input id=\"ds-course\" type=\"text\" placeholder=\"Enter course code or name\"><span>The course you enter will be used in the next step.</span></label>",
+      "css": ".ds-field { display: grid; gap: 7px; color: var(--ink, #132b3d); font: 720 14px/1.4 Inter, ui-sans-serif, system-ui, sans-serif; } .ds-field input { min-height: 48px; padding: 0 13px; color: var(--ink, #132b3d); background: #fff; border: 1px solid #b9c5cc; border-radius: 5px; font: 400 16px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; } .ds-field input:hover { border-color: #8a9aa4; } .ds-field input:focus-visible { outline: 3px solid #8ba7f5; outline-offset: 3px; } .ds-field span { color: var(--muted, #637481); font: 400 12px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; }"
+    },
+    {
+      "name": "Course Upload Area",
+      "kind": "custom",
+      "refersTo": "upload-area",
+      "description": "Keeps a multi-image upload visibly owned by one entered course.",
+      "html": "<div class=\"ds-upload\"><div class=\"ds-upload-name\"><small>Course 1</small><strong>CMPS 251</strong><span>Programming Concepts</span></div><label class=\"ds-drop\"><input type=\"file\" multiple><strong>Upload screenshots for CMPS 251</strong><span>Select one or several PNG/JPG images</span></label></div>",
+      "css": ".ds-upload { display: grid; grid-template-columns: 160px 1fr; min-height: 130px; color: var(--ink, #132b3d); background: #fff; border: 1px solid var(--line, #d5dde2); font-family: Inter, ui-sans-serif, system-ui, sans-serif; } .ds-upload-name { display: grid; align-content: center; gap: 4px; padding: 20px; border-right: 1px solid var(--line, #d5dde2); } .ds-upload-name small, .ds-upload-name span, .ds-drop span { color: var(--muted, #637481); font-size: 12px; } .ds-drop { display: grid; align-content: center; gap: 4px; margin: 12px; padding: 20px; border: 2px dashed #b5c1c8; border-radius: 6px; cursor: pointer; } .ds-drop:hover { border-color: var(--blue, #2457d6); background: #fbfcff; } .ds-drop:focus-within { outline: 3px solid #8ba7f5; outline-offset: 3px; } .ds-drop input { position: absolute; width: 1px; height: 1px; opacity: 0; }"
+    },
+    {
+      "name": "Selected Schedule Option",
+      "kind": "card",
+      "refersTo": "schedule-option-selected",
+      "description": "A compact, text-led selection state for generated schedules.",
+      "html": "<button class=\"ds-schedule\"><strong>Schedule 1 · Best match</strong><span>No conflicts · Open sections only</span></button>",
+      "css": ".ds-schedule { width: 100%; display: grid; gap: 2px; padding: 12px 14px; color: var(--ink, #132b3d); background: var(--blue-soft, #e9efff); border: 2px solid var(--blue, #2457d6); border-radius: 5px; font-family: Inter, ui-sans-serif, system-ui, sans-serif; text-align: left; cursor: pointer; } .ds-schedule strong { font-size: 16px; } .ds-schedule span { color: var(--muted, #637481); font-size: 12px; } .ds-schedule:hover { background: #dde7ff; } .ds-schedule:focus-visible { outline: 3px solid #8ba7f5; outline-offset: 3px; } .ds-schedule:active { background: #d3dfff; }"
+    },
+    {
+      "name": "Privacy Notice",
+      "kind": "custom",
+      "description": "Places privacy instructions before the first upload action.",
+      "html": "<div class=\"ds-privacy\" role=\"note\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" aria-hidden=\"true\"><path d=\"M12 3 5 6v5c0 4.6 2.8 8.2 7 10 4.2-1.8 7-5.4 7-10V6l-7-3Z\"/><path d=\"m9 12 2 2 4-4\"/></svg><span>Hide your name, student ID, and email before uploading.</span></div>",
+      "css": ".ds-privacy { display: flex; align-items: flex-start; gap: 10px; padding: 13px 15px; color: #335f56; background: var(--green-soft, #e1f3ed); font: 400 13px/1.5 Inter, ui-sans-serif, system-ui, sans-serif; } .ds-privacy svg { width: 18px; flex: none; margin-top: 1px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Academic Planning Desk",
+    "overview": "The interface is a quiet, precise, trustworthy academic workspace. It should feel like a clear desk prepared for one consequential task: translating a student's own PeopleSoft evidence into schedules they can inspect and trust. Alignment, restrained color, and timetable geometry provide structure; decoration never competes with course data.\n\nThe experience is sequential rather than dashboard-driven. It moves from courses to screenshots to verification and schedules, with every screenshot and generated meeting visibly tied back to the course the student supplied. It explicitly rejects playful consumer-app styling and dense admin-dashboard composition.",
+    "keyCharacteristics": [
+      "Formal and institutional without becoming bureaucratic.",
+      "Sequential, focused, and explicit about provenance.",
+      "Flat, bordered work surfaces with compact controls.",
+      "Familiar browser affordances and visible state changes.",
+      "Responsive structure from narrow mobile screens to desktop."
+    ],
+    "rules": [
+      { "name": "The One-Action Rule", "body": "Institutional Blue identifies action or state. It must never become general decoration.", "section": "colors" },
+      { "name": "The Semantic Pairing Rule", "body": "Green, gold, and blue states always include readable text, labels, or geometry; color alone never communicates meaning.", "section": "colors" },
+      { "name": "The Data Legibility Rule", "body": "Course codes, class numbers, dates, statuses, and times must remain plainly readable. Never trade legibility for visual personality.", "section": "typography" },
+      { "name": "The Single-Family Rule", "body": "UI labels, buttons, and course data always use the product sans stack; display or decorative fonts are forbidden.", "section": "typography" },
+      { "name": "The Flat Workspace Rule", "body": "A surface must earn separation through task grouping before receiving a border. Decorative shadows and glass effects are forbidden.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do ask for course identities before presenting course-specific upload controls.",
+      "Do allow multiple screenshots within every course upload area and keep each image associated with its course.",
+      "Do reserve Institutional Blue for primary actions, current steps, focus, and selected states.",
+      "Do preserve explicit text for Open, Wait List, Closed, conflict-free, and bundled-component states.",
+      "Do use persistent labels, visible keyboard focus, semantic HTML, and practical touch targets.",
+      "Do keep the workflow structurally readable from 320px mobile widths through desktop.",
+      "Do use one consistent component vocabulary across courses, screenshots, verification, and schedules."
+    ],
+    "donts": [
+      "Don't invent courses, sections, meetings, instructors, or results that the student did not supply.",
+      "Don't make the product resemble playful consumer apps with gamification, decorative illustrations, or casual visual language.",
+      "Don't use dense admin dashboards dominated by sidebars, metric cards, and unrelated system information.",
+      "Don't wrap every region in a rounded card or add decorative shadows, gradients, glass effects, or ornamental motion.",
+      "Don't encode course identity, registration status, or schedule validity with color alone.",
+      "Don't use display fonts in labels, buttons, or course data, or reinvent familiar form controls for flavor.",
+      "Don't use modals where inline disclosure or the next sequential stage can complete the task."
+    ]
+  }
+}

@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Build conflict-free schedules from the exact course options you verify.">
+  <title>UDST Schedule Generator</title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#app-main">Skip to planner</a>
+
+  <header class="site-header">
+    <a class="brand" href="#courses" data-go="courses" aria-label="UDST Schedule Generator home">
+      <span class="mark" aria-hidden="true">U</span>
+      <span>UDST Schedule</span>
+    </a>
+    <span class="scope-note">Plan only · Registration stays in PeopleSoft</span>
+  </header>
+
+  <main id="app-main" class="app-shell">
+    <section class="intro" aria-labelledby="page-title">
+      <h1 id="page-title">Build a schedule from the courses you verify.</h1>
+      <p>Attach your PeopleSoft screenshots as a private, local reference. Confirm every option and meeting before this tool checks for conflicts.</p>
+    </section>
+
+    <nav class="progress" aria-label="Plan progress">
+      <ol id="progress-list">
+        <li data-step="courses" aria-current="step"><span>1</span><strong>Courses</strong></li>
+        <li data-step="screenshots"><span>2</span><strong>Screenshots</strong></li>
+        <li data-step="verify"><span>3</span><strong>Verify options</strong></li>
+        <li data-step="results"><span>4</span><strong>Schedules</strong></li>
+      </ol>
+    </nav>
+
+    <div id="live-status" class="sr-only" role="status" aria-live="polite"></div>
+
+    <section id="courses" class="stage" aria-labelledby="courses-title">
+      <div class="stage-heading">
+        <div>
+          <h2 id="courses-title" tabindex="-1">Which courses must be in your schedule?</h2>
+          <p>Add each required course once. You can return and change this list later.</p>
+        </div>
+        <button id="clear-plan" class="button button-quiet" type="button">Clear this plan</button>
+      </div>
+
+      <form id="courses-form" class="panel" novalidate>
+        <div id="courses-errors" class="error-summary" role="alert" tabindex="-1" hidden></div>
+        <div class="field term-field">
+          <label for="term">Academic term</label>
+          <select id="term" name="term" required aria-describedby="term-help">
+            <option value="" disabled selected>Choose a term</option>
+            <option value="Fall 2026">Fall 2026</option>
+            <option value="Spring 2027">Spring 2027</option>
+            <option value="Summer 2027">Summer 2027</option>
+          </select>
+          <span id="term-help" class="help">Schedules are kept only for this browser session.</span>
+        </div>
+
+        <div id="course-fields" class="course-fields"></div>
+
+        <div class="form-actions">
+          <button id="add-course" class="button button-secondary" type="button">Add another course</button>
+          <button class="button button-primary" type="submit">Continue to screenshots</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="screenshots" class="stage" aria-labelledby="screenshots-title" hidden>
+      <div class="stage-heading">
+        <div>
+          <h2 id="screenshots-title" tabindex="-1">Attach screenshots to each course</h2>
+          <p>Images remain in this browser and are used only as your reference while entering section details.</p>
+        </div>
+      </div>
+
+      <div class="privacy" role="note">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 3 5 6v5c0 4.6 2.8 8.2 7 10 4.2-1.8 7-5.4 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg>
+        <div><strong>Remove personal information first.</strong><span>Hide your name, student ID, email, and QR codes. Never provide your PeopleSoft password. Files are not uploaded or saved after this tab closes.</span></div>
+      </div>
+
+      <form id="screenshots-form" novalidate>
+        <div id="screenshots-errors" class="error-summary" role="alert" tabindex="-1" hidden></div>
+        <div id="upload-list" class="upload-list"></div>
+        <div class="form-actions">
+          <button class="button button-secondary" type="button" data-go="courses">Back to courses</button>
+          <button class="button button-primary" type="submit">Enter section details</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="verify" class="stage" aria-labelledby="verify-title" hidden>
+      <div class="stage-heading">
+        <div>
+          <h2 id="verify-title" tabindex="-1">Verify the options shown in PeopleSoft</h2>
+          <p>Enter each option as one bundle. Its lecture, lab, and tutorial will always stay together.</p>
+        </div>
+      </div>
+
+      <div class="capability-note" role="note">
+        <strong>This prototype does not read screenshots automatically.</strong>
+        <span>Use the attached filenames as a reference and enter the details exactly as PeopleSoft shows them. No schedule is generated until every course is confirmed.</span>
+      </div>
+
+      <form id="verify-form" novalidate>
+        <div id="verify-errors" class="error-summary" role="alert" tabindex="-1" hidden></div>
+        <div id="verification-list" class="verification-list"></div>
+        <div class="form-actions">
+          <button class="button button-secondary" type="button" data-go="screenshots">Back to screenshots</button>
+          <button class="button button-primary" type="submit">Generate conflict-free schedules</button>
+        </div>
+      </form>
+    </section>
+
+    <section id="results" class="stage" aria-labelledby="results-title" hidden>
+      <div class="stage-heading results-heading">
+        <div>
+          <h2 id="results-title" tabindex="-1">Possible schedules</h2>
+          <p id="results-summary">Every result contains one complete verified option for each course.</p>
+        </div>
+        <span class="verified-note">Verified input · Closed options excluded</span>
+      </div>
+
+      <div id="no-results" class="empty-state" hidden></div>
+
+      <div id="results-content" hidden>
+        <fieldset id="schedule-selector" class="schedule-selector">
+          <legend>Choose a schedule</legend>
+          <div id="schedule-options" class="schedule-options"></div>
+        </fieldset>
+
+        <div class="result-workspace">
+          <section class="weekly-overview" aria-labelledby="weekly-title">
+            <div class="section-heading">
+              <div><h3 id="weekly-title">Weekly overview</h3><p>Events are grouped by day and listed in time order.</p></div>
+              <button id="print-schedule" class="button button-secondary" type="button">Print schedule</button>
+            </div>
+            <div id="week-board" class="week-board"></div>
+          </section>
+
+          <section class="agenda" aria-labelledby="agenda-title">
+            <div class="section-heading">
+              <div><h3 id="agenda-title">Complete meeting details</h3><p>Use this table to verify every class before registration.</p></div>
+              <button id="copy-classes" class="button button-primary" type="button">Copy class numbers</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <caption class="sr-only">Meetings in the selected schedule</caption>
+                <thead><tr><th scope="col">Day</th><th scope="col">Time</th><th scope="col">Course</th><th scope="col">Component</th><th scope="col">Section</th><th scope="col">Class no.</th><th scope="col">Room</th><th scope="col">Status</th></tr></thead>
+                <tbody id="agenda-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <aside class="registration-note">
+            <strong>Registration still happens in PeopleSoft.</strong>
+            <span>Seat availability can change. Recheck each class number and status before submitting your registration.</span>
+          </aside>
+
+          <div class="form-actions">
+            <button class="button button-secondary" type="button" data-go="verify">Edit verified options</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>Course screenshots remain local to this tab · Schedule validity depends on the details you confirm</footer>
+
+  <template id="course-row-template">
+    <fieldset class="course-row">
+      <legend></legend>
+      <div class="field">
+        <label>Course code or name</label>
+        <input type="text" maxlength="80" autocomplete="off" placeholder="Example: CMPS 251" required>
+        <span class="help">Use the same course identity shown in PeopleSoft.</span>
+      </div>
+      <button class="button button-danger remove-course" type="button">Remove</button>
+    </fieldset>
+  </template>
+
+  <script src="assets/scheduler.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>
