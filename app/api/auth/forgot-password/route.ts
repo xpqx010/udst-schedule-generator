@@ -23,15 +23,15 @@ export async function POST(request: NextRequest) {
     const token = randomBytes(32).toString("hex");
     const tokenHash = createHash("sha256").update(token).digest("hex");
     const expiresAt = new Date(Date.now() + 30 * 60 * 1000);
-    await passwordResets.deleteMany({ userId: user._id });
-    await passwordResets.insertOne({ userId: user._id, tokenHash, expiresAt, createdAt: new Date() });
+    const inserted = await passwordResets.insertOne({ userId: user._id, tokenHash, expiresAt, createdAt: new Date() });
 
     const appUrl = process.env.APP_URL || request.nextUrl.origin;
     try {
       const delivery = await sendPasswordResetEmail(user.email, `${appUrl}/reset-password?token=${token}`);
+      await passwordResets.deleteMany({ userId: user._id, _id: { $ne: inserted.insertedId } });
       return NextResponse.json({ message: GENERIC_MESSAGE, ...(delivery.previewUrl ? { previewUrl: delivery.previewUrl } : {}) });
     } catch (error) {
-      await passwordResets.deleteOne({ tokenHash });
+      await passwordResets.deleteOne({ _id: inserted.insertedId });
       console.error("Password reset delivery failed", error);
       return apiError(503, "EMAIL_UNAVAILABLE", "We could not send the reset email. Please try again later.");
     }

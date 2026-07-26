@@ -31,3 +31,6 @@ npm-debug.log*
 .opencode/
 .impeccable/live/
 .impeccable/critique/
+
+# Private local screenshot storage
+storage/screenshots/

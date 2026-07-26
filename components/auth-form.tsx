@@ -46,7 +46,7 @@ export function AuthForm({ mode }: { mode: AuthMode }) {
   return (
     <div className="auth-form-shell">
       <header className="form-heading">
-        <h2>{signup ? "Create an account" : "Sign in"}</h2>
+        <h1>{signup ? "Create an account" : "Sign in"}</h1>
         <span>{signup ? "Create a private account for your future term plans." : "Return to your schedule-planning account."}</span>
       </header>
 

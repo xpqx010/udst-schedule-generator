@@ -8,7 +8,10 @@ function clientPromise() {
   const uri = process.env.MONGODB_URI;
   if (!uri) throw new Error("MONGODB_URI is not configured.");
   if (!global.__mongoClientPromise) {
-    global.__mongoClientPromise = new MongoClient(uri, { maxPoolSize: 10 }).connect();
+    global.__mongoClientPromise = new MongoClient(uri, { maxPoolSize: 10 }).connect().catch((error) => {
+      global.__mongoClientPromise = undefined;
+      throw error;
+    });
   }
   return global.__mongoClientPromise;
 }

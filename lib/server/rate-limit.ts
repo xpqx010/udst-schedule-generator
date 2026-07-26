@@ -3,17 +3,22 @@ import { collections } from "@/lib/server/collections";
 export async function allowRequest(key: string, limit: number, windowMs: number) {
   const { rateLimits } = await collections();
   const now = new Date();
-  const current = await rateLimits.findOne({ key });
-  if (!current || current.resetAt <= now) {
-    const resetAt = new Date(now.getTime() + windowMs);
-    await rateLimits.updateOne({ key }, { $set: { count: 1, resetAt } }, { upsert: true });
-    return { allowed: true, retryAfter: 0 };
-  }
-  if (current.count >= limit) {
-    return { allowed: false, retryAfter: Math.max(1, Math.ceil((current.resetAt.getTime() - now.getTime()) / 1000)) };
-  }
-  await rateLimits.updateOne({ key, resetAt: current.resetAt }, { $inc: { count: 1 } });
-  return { allowed: true, retryAfter: 0 };
+  const resetAt = new Date(now.getTime() + windowMs);
+  const current = await rateLimits.findOneAndUpdate(
+    { key },
+    [{
+      $set: {
+        count: { $cond: [{ $gt: ["$resetAt", now] }, { $add: [{ $ifNull: ["$count", 0] }, 1] }, 1] },
+        resetAt: { $cond: [{ $gt: ["$resetAt", now] }, "$resetAt", resetAt] },
+      },
+    }],
+    { upsert: true, returnDocument: "after" },
+  );
+  if (!current) throw new Error("Rate limit state was not saved.");
+  return {
+    allowed: current.count <= limit,
+    retryAfter: current.count <= limit ? 0 : Math.max(1, Math.ceil((current.resetAt.getTime() - now.getTime()) / 1000)),
+  };
 }
 
 export function requestKey(request: Request, action: string) {
